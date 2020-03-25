@@ -1,0 +1,21 @@
+host: 'localhost'
+wrong-version: '&4Warning: Incompatible server version! Disabling ImprovedNames.'
+database-name: 'improvednames'
+port: 3306
+username: 'root'
+password: 'password'
+table: 'player_data'
+color-symbol: '&'
+offline-message: '&e[&bIName&e] &cThe player you have specified is offline!'
+name-too-long: 'The nickname you specified is too long!'
+rename-usage: '&e[&bIName&e] &cIncorrect syntax! Usage: /rename <player> <nickname>'
+rename-success: '&e[&bIName&e] &3Successfully changed username to '
+gui-title: '&6Rename'
+sql-database-attributes:
+  - ['UUID', 'varChar', 'PRIMARY KEY']
+  - ['REALNAME', 'varChar', 'NOT NULL']
+  - ['NAME', 'varChar', 'NOT NULL']
+  - ['RAWNICKNAME', 'varChar', 'NOT NULL']
+
+
+

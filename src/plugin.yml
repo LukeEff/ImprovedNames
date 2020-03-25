@@ -1,0 +1,30 @@
+name: ImprovedNames
+version: 1.0.0
+api-version: 1.15
+author: lukeeff
+description: Usernames and user tag customizable interface!
+main: io.github.lukeeff.ImprovedNames
+commands:
+  rename:
+    description: Change a player username and nametag.
+    usage: /rename <player> <name>
+    permission: improvednames.rename.self
+    permission-message: §e[§bIName§e]§c You don't have permission to rename!
+  realname:
+    description: Get the real name of a player.
+    usage: /realname <player>
+    permission: improvednames.realname
+    permission-message: §e[§bIName§e]§c You don't have permission to unmask a nickname!
+permissions:
+  improvednames.rename.self:
+   description: Allows player to rename themself.
+   default: op
+  improvednames.rename.others:
+    description: Allows player to rename anybody.
+    default: op
+  improvednames.rename.custom:
+    description: Allows players to give themself a custom name.
+    default: op
+  improvednames.realname:
+    description: Allows players to see the name behind a nickname. Necessary for custom nicknames
+    default: op

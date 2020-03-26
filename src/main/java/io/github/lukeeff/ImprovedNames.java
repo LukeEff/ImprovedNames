@@ -4,6 +4,7 @@ import io.github.lukeeff.commands.RealName;
 import io.github.lukeeff.commands.Rename;
 import io.github.lukeeff.database.SQLite;
 import io.github.lukeeff.event_listener.PlayerJoin;
+import io.github.lukeeff.scoreboard.ScoreboardCore;
 import io.github.lukeeff.string_modification.Color;
 import io.github.lukeeff.config.Utility;
 import io.github.lukeeff.version.VersionHandler;
@@ -21,11 +22,12 @@ public class ImprovedNames extends JavaPlugin {
     @Override
     public void onEnable() {
         Utility.plugin = this;
+
         VersionPointer.handleVersion(this);
         initializeConfig();
         sql = new SQLite(this);
         color = new Color(this);
-
+        initializeScoreboard();
     this.getServer().getPluginManager().registerEvents(new PlayerJoin(this), this);
     this.getCommand("rename").setExecutor(new Rename(this, sql, versionHandler
     , color));
@@ -46,4 +48,9 @@ public class ImprovedNames extends JavaPlugin {
         config = this.getConfig();
 
     }
+
+    private void initializeScoreboard() {
+        new ScoreboardCore();
+    }
+
 }

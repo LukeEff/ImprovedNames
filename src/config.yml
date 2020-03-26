@@ -1,6 +1,7 @@
 host: 'localhost'
 wrong-version: '&4Warning: Incompatible server version! Disabling ImprovedNames.'
 database-name: 'improvednames'
+database-folder-name: 'sqlite'
 port: 3306
 username: 'root'
 password: 'password'
@@ -10,12 +11,21 @@ offline-message: '&e[&bIName&e] &cThe player you have specified is offline!'
 name-too-long: 'The nickname you specified is too long!'
 rename-usage: '&e[&bIName&e] &cIncorrect syntax! Usage: /rename <player> <nickname>'
 rename-success: '&e[&bIName&e] &3Successfully changed username to '
+invalid-group-message: '&e[&bIName&e] &cWarning: Invalid group syntax. Please correct the groups category in config.'
 gui-title: '&6Rename'
 sql-database-attributes:
   - ['UUID', 'varChar', 'PRIMARY KEY']
   - ['REALNAME', 'varChar', 'NOT NULL']
   - ['NAME', 'varChar', 'NOT NULL']
   - ['RAWNICKNAME', 'varChar', 'NOT NULL']
+  - ['PREFIX', 'varChar']
+  - ['SUFFIX', 'varChar']
+groups:
+  - ['ExampleGroup', '&e[&bIName Example Prefix&e]&d', '&7Example Suffix!']
+  - ['Admin', '&b[&4Admin&b] &c', '']
+  - ['Developer', '&8[&cDeveloper&8] &c', '']
+  - ['Moderator', '&b[&4Moderator&b] &c', '']
+  - ['AnotherGroup','','&4Suffix']
 
 
 

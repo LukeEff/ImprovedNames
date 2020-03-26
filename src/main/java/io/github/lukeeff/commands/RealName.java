@@ -1,6 +1,7 @@
 package io.github.lukeeff.commands;
 
 import io.github.lukeeff.ImprovedNames;
+
 import io.github.lukeeff.database.SQLite;
 import io.github.lukeeff.string_modification.Color;
 import org.bukkit.ChatColor;

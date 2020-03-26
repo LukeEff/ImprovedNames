@@ -3,6 +3,7 @@ package io.github.lukeeff.event_listener;
 import io.github.lukeeff.ImprovedNames;
 import io.github.lukeeff.commands.Rename;
 import io.github.lukeeff.database.SQLite;
+import io.github.lukeeff.scoreboard.ScoreboardCore;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,11 +31,30 @@ public class PlayerJoin implements Listener {
     public void onJoin(PlayerJoinEvent event) throws SQLException {
         final Player player = event.getPlayer();
         final String uuid = player.getUniqueId().toString();
-        sql.checkPlayerData(player);
+        //sql.checkPlayerData(player);
+        addPlayerToDatabase(uuid, player.getName());
         final String nickName = sql.getPlayerNickname(uuid);
+        final String prefix = sql.getPrefix(uuid);
+        final String suffix = sql.getSuffix(uuid);
+        handlePlayerGroup(player, prefix, suffix);
+
         event.setJoinMessage(ChatColor.BLUE + nickName + ChatColor.BLUE + " joined the game");
         setPlayerName(player, nickName);
     }
+
+    private void handlePlayerGroup(Player player, String prefix, String suffix) {
+        if(ScoreboardCore.teamExists(player.getName())) {
+            return;
+        } else {
+            ScoreboardCore.createNewPlayerGroup(player.getName(), prefix, suffix);
+            player.setScoreboard(ScoreboardCore.getScoreboard());
+        }
+    }
+
+    private void addPlayerToDatabase(String uuid, String name) {
+        if(!sql.inDatabase(uuid)) {
+            sql.addPlayer(uuid, name, name, null, null);
+    }}
 
     /**
      * Set the player name to the nickname stored in the database
@@ -45,6 +65,5 @@ public class PlayerJoin implements Listener {
         Rename.changeNameTag(player, nickName);
         Rename.setPlayerName(player, nickName);
     }
-
 
 }

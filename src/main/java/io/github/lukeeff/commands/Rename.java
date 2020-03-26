@@ -15,8 +15,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.v1_15_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 public class Rename implements CommandExecutor {
 
@@ -178,17 +176,12 @@ public class Rename implements CommandExecutor {
 
     /**
      * Registers the param nickname with the param player in the sql database
-     * @param player
-     * @param nickname
+     * @param player the target player
+     * @param nickname the new nickname
      */
     private void registerNickname(Player player, String nickname) {
-        PreparedStatement statement = sql.modifyRecord(player, nickname);
-        try {
-            statement.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
+        String uuid = player.getUniqueId().toString();
+        sql.setPlayerNickname(uuid, nickname);
     }
 
 }

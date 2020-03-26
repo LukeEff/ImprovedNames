@@ -11,12 +11,15 @@ public class Utility {
 
     //All data keys in config file that is used is declared here.
     public static ImprovedNames plugin;
-    public static final String databaseFolderName = "sqlite";
+    private static final String databaseFolderNamePath = "database-folder-name";
     public static final String databasePath = "database-name";
     public static final String colorPath = "color-symbol";
     public static final String tablePath = "table";
-    public static final String mapListPath = "sql-database-attributes";
+    private static final String tableAttributesPath = "sql-database-attributes";
     public static final String wrongVersionPath = "wrong-version";
+    private static final String groupsPath = "groups";
+    private static final String invalidTeamConfigMessagePath = "invalid-group-message";
+
     //For the GUI
     //TODO Create a good GUI.
     public static final String playerGUI = "player-gui";
@@ -25,6 +28,39 @@ public class Utility {
     public static final String coreGUITitle = "Improved Names";
     public static final String colorsGUI = "color-gui";
     public static final String colorsGUITitle = "Choose a color";
+
+
+    public static String getDatabaseFolderName() {
+        return getConfigString(databaseFolderNamePath);
+    }
+
+    public static String getDatabasePath() {
+        return databasePath;
+    }
+
+    public static String getColorPath() {
+        return colorPath;
+    }
+
+    public static String getTablePath() {
+        return tablePath;
+    }
+
+    public static String getTableAttributesPath() {
+        return tableAttributesPath;
+    }
+
+    public static String getWrongVersionPath() {
+        return wrongVersionPath;
+    }
+
+    public static String getGroupsPath() {
+        return groupsPath;
+    }
+
+    public static String getInvalidTeamConfigMessagePath() {
+        return invalidTeamConfigMessagePath;
+    }
 
     /**
      * Gets the config reference from the main instance
@@ -59,12 +95,14 @@ public class Utility {
         return plugin.getDataFolder();
     }
 
+    public static List<?> getGroupList() {return getConfig().getList(groupsPath); }
+
     /**
      * Get a map list out from the config
      * @return the map list from the target param path
      */
-    public static List<?> getMapList() {
-        return getConfig().getList(mapListPath);
+    public static List<?> getConfigList() {
+        return getConfig().getList(tableAttributesPath);
     }
 
     /**
@@ -95,6 +133,9 @@ public class Utility {
         return getConfig().getInt(path);
     }
 
+    public static String getInvalidTeamConfigMessage() {
+        return getConfigStringInColor(invalidTeamConfigMessagePath);
+    }
 
 
 }

@@ -29,17 +29,11 @@ public class Utility {
     private static final String INVALIDNICKNAMEPATH = "invalid-nickname-message";
     private static final String CLEAREDNICKNAMESUCCESSPATH = "cleared-nickname-success";
 
-    //For the GUI
-    //TODO Create a good GUI.
-    public static final String playerGUI = "player-gui";
-    public static final String playerGUITitle = "Rename a player";
-    public static final String coreGUI = "core-gui";
-    public static final String coreGUITitle = "Improved Names";
-    public static final String colorsGUI = "color-gui";
-    public static final String colorsGUITitle = "Choose a color";
-
     public static String getClearedNicknameSuccessMessage() {
         return getConfigStringInColor(CLEAREDNICKNAMESUCCESSPATH);
+    }
+    public static String getDatabaseName() {
+        return getConfigString(databasePath);
     }
 
     public static String getInvalidNicknameMessage() {
@@ -133,15 +127,6 @@ public class Utility {
     public static String getConfigStringInColor(String path) {
         String message = getConfigString(path);
         return toColor(message);
-    }
-
-    /**
-     * Gets an int from the config
-     * @param path the path to the int
-     * @return the int from the specified path
-     */
-    public static int getConfigInt(String path) {
-        return getConfig().getInt(path);
     }
 
     public static String getInvalidTeamConfigMessage() {

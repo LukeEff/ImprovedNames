@@ -11,6 +11,8 @@ import io.github.lukeeff.version.VersionPointer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+//TODO Use protocollib for nametags instead of modifying gameprofile
+
 public class ImprovedNames extends JavaPlugin {
 
     private Color color;

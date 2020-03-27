@@ -20,7 +20,7 @@ public class ClearPrefix implements CommandExecutor {
             SQLite.setPlayerPrefix(uuid, null);
             ScoreboardCore.setNewPlayerPrefix(groupName, ""); //TODO Just grab it from the database
             ScoreboardCore.updateScoreBoard();
-            ((Player) commandSender).sendMessage(ChatColor.GREEN + "Success. Removed prefix from player " + groupName);
+            commandSender.sendMessage(ChatColor.GREEN + "Success. Removed prefix from player " + groupName);
         }
         return true;
     }

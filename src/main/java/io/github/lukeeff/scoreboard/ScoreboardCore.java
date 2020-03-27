@@ -120,9 +120,7 @@ public class ScoreboardCore {
         setSuffix(group, suffix);
 
     }
-
-
-
+    
     private static void setPrefix(Team group, String prefix) {
         try {
             group.setPrefix(prefix);

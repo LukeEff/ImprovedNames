@@ -8,7 +8,7 @@ import java.sql.*;
 public class SQLite extends SQLiteSyntax {
 
     ImprovedNames plugin;
-    private Connection connection;
+    private static Connection connection;
 
     /**
      * Constructor for SQLite database initialization. Must be called at onEnable();
@@ -39,7 +39,7 @@ public class SQLite extends SQLiteSyntax {
      * @param string the string
      * @return the string with no colors or capitals
      */
-    private String rawify(String string) {
+    public static String rawify(String string) {
         return ChatColor.stripColor(string).toLowerCase();
     }
 
@@ -58,7 +58,7 @@ public class SQLite extends SQLiteSyntax {
      * @param realName the username of the player
      * @throws SQLException thrown when SQL syntax is wrong
      */
-    public void addPlayer(String uuid, String realName, String nickName, String prefix, String suffix)  {
+    public static void addPlayer(String uuid, String realName, String nickName, String prefix, String suffix)  {
         try {
             PreparedStatement insertPlayer = connection.prepareStatement(INSERTPLAYER);
             final String RAWNICKNAME = rawify(nickName);
@@ -81,7 +81,7 @@ public class SQLite extends SQLiteSyntax {
      * @return the object found in the database
      * @throws SQLException thrown in respect to improper syntax
      */
-    private String getPlayerData(String whereColumnKey, String fromColumn, String whereColumn) throws SQLException {
+    private static String getPlayerData(String whereColumnKey, String fromColumn, String whereColumn) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(selectSyntax(fromColumn, whereColumn));
         statement.setString(1, whereColumnKey);
         ResultSet name = statement.executeQuery();
@@ -94,7 +94,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid of the player.
      * @return the nick name associated with the uuid.
      */
-    public String getPlayerNickname(String uuid) {
+    public static String getPlayerNickname(String uuid) {
         try {
             return getPlayerData(uuid, NICKNAME, UUID);
         } catch (SQLException e) {
@@ -108,7 +108,7 @@ public class SQLite extends SQLiteSyntax {
      * @param nickname the nick name of the player.
      * @return the username associated with the nick name.
      */
-    public String getPlayerFromNickname(String nickname) {
+    public static String getPlayerFromNickname(String nickname) {
         final String RAWNAME = rawify(nickname);
         try {
             return getPlayerData(RAWNAME, REALNAME, RAWNICKNAME);
@@ -123,7 +123,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid of the player.
      * @return the name of the player.
      */
-    public String getPlayerName(String uuid) {
+    public static String getPlayerName(String uuid) {
         try {
             return getPlayerData(uuid, REALNAME, UUID);
         } catch (SQLException e) {
@@ -137,7 +137,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid of the player
      * @return the prefix associated with the uuid.
      */
-    public String getPrefix(String uuid) {
+    public static String getPrefix(String uuid) {
         try {
             return getPlayerData(uuid, PREFIX, UUID);
         } catch (SQLException e) {
@@ -151,7 +151,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid of the player
      * @return the suffix associated with the uuid
      */
-    public String getSuffix(String uuid) {
+    public static String getSuffix(String uuid) {
         try {
             return getPlayerData(uuid, SUFFIX, UUID);
         } catch (SQLException e) {
@@ -167,7 +167,7 @@ public class SQLite extends SQLiteSyntax {
      * @param newValue the new value for the column in respect to the player
      * @throws SQLException thrown with sql syntax error
      */
-    private void setPlayerData(String uuid, String column, String newValue) throws SQLException {
+    private static void setPlayerData(String uuid, String column, String newValue) throws SQLException {
         PreparedStatement statement = connection.prepareStatement(updateSyntax(column));
         statement.setString(1, newValue);
         statement.setString(2, uuid);
@@ -179,7 +179,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid associated with the nickname being changed
      * @param nickname the nickname of the player
      */
-    public void setPlayerNickname(String uuid, String nickname) {
+    public static void setPlayerNickname(String uuid, String nickname) {
         final String RAWNAME = rawify(nickname);
         try {
             setPlayerData(uuid, RAWNICKNAME, RAWNAME);
@@ -194,7 +194,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid associated with the player
      * @param prefix the prefix being set
      */
-    public void setPlayerPrefix(String uuid, String prefix) {
+    public static void setPlayerPrefix(String uuid, String prefix) {
         try {
             setPlayerData(uuid, PREFIX, prefix);
         } catch (SQLException e) {
@@ -207,7 +207,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid associated with the player
      * @param suffix the suffix being set
      */
-    public void setPlayerSuffix(String uuid, String suffix) {
+    public static void setPlayerSuffix(String uuid, String suffix) {
         try {
             setPlayerData(uuid, SUFFIX, suffix);
         } catch (SQLException e) {
@@ -220,7 +220,7 @@ public class SQLite extends SQLiteSyntax {
      * @param uuid the uuid of the player
      * @return true if player name was found. False if player name wasn't found
      */
-    public boolean inDatabase(String uuid) {
+    public static boolean inDatabase(String uuid) {
 
         if(getPlayerName(uuid) != null) {
             return true;

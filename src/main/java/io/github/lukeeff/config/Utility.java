@@ -2,6 +2,7 @@ package io.github.lukeeff.config;
 
 import io.github.lukeeff.ImprovedNames;
 import io.github.lukeeff.string_modification.Color;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -19,6 +20,14 @@ public class Utility {
     public static final String wrongVersionPath = "wrong-version";
     private static final String groupsPath = "groups";
     private static final String invalidTeamConfigMessagePath = "invalid-group-message";
+    private static final String prefixInTabPath = "prefix-in-tab";
+    private static final String suffixInTabPath = "suffix-in-tab";
+    private static final String OFFLINEMESSAGEPATH = "offline-message";
+    private static final String TOOLONGNAMEPATH = "name-too-long";
+    private static final String RENAMEUSAGEPATH = "rename-usage";
+    private static final String RENAMESUCCESSPATH = "rename-success";
+    private static final String INVALIDNICKNAMEPATH = "invalid-nickname-message";
+    private static final String CLEAREDNICKNAMESUCCESSPATH = "cleared-nickname-success";
 
     //For the GUI
     //TODO Create a good GUI.
@@ -29,37 +38,39 @@ public class Utility {
     public static final String colorsGUI = "color-gui";
     public static final String colorsGUITitle = "Choose a color";
 
+    public static String getClearedNicknameSuccessMessage() {
+        return getConfigStringInColor(CLEAREDNICKNAMESUCCESSPATH);
+    }
 
+    public static String getInvalidNicknameMessage() {
+        return getConfigStringInColor(INVALIDNICKNAMEPATH);
+    }
     public static String getDatabaseFolderName() {
         return getConfigString(databaseFolderNamePath);
     }
 
-    public static String getDatabasePath() {
-        return databasePath;
+    public static boolean getPrefixInTabValid() {
+        return plugin.config.getBoolean(prefixInTabPath);
     }
 
-    public static String getColorPath() {
-        return colorPath;
+    public static boolean getSuffixInTabValid() {
+        return plugin.config.getBoolean(suffixInTabPath);
     }
 
-    public static String getTablePath() {
-        return tablePath;
+    public static String getOfflineMessage() {
+        return getConfigStringInColor(OFFLINEMESSAGEPATH);
     }
 
-    public static String getTableAttributesPath() {
-        return tableAttributesPath;
+    public static String getRenameUsageMessage() {
+        return getConfigStringInColor(RENAMEUSAGEPATH);
     }
 
-    public static String getWrongVersionPath() {
-        return wrongVersionPath;
+    public static String getTooLongNameMessage() {
+        return getConfigStringInColor(TOOLONGNAMEPATH);
     }
 
-    public static String getGroupsPath() {
-        return groupsPath;
-    }
-
-    public static String getInvalidTeamConfigMessagePath() {
-        return invalidTeamConfigMessagePath;
+    public static String getRenameSuccessMessage() {
+        return getConfigStringInColor(RENAMESUCCESSPATH);
     }
 
     /**

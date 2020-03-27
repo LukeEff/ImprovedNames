@@ -4,6 +4,7 @@ import io.github.lukeeff.ImprovedNames;
 import io.github.lukeeff.commands.Rename;
 import io.github.lukeeff.database.SQLite;
 import io.github.lukeeff.scoreboard.ScoreboardCore;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -31,23 +32,25 @@ public class PlayerJoin implements Listener {
     public void onJoin(PlayerJoinEvent event) throws SQLException {
         final Player player = event.getPlayer();
         final String uuid = player.getUniqueId().toString();
-        //sql.checkPlayerData(player);
         addPlayerToDatabase(uuid, player.getName());
+        final String realName = sql.getPlayerName(uuid);
         final String nickName = sql.getPlayerNickname(uuid);
         final String prefix = sql.getPrefix(uuid);
         final String suffix = sql.getSuffix(uuid);
-        handlePlayerGroup(player, prefix, suffix);
+        ScoreboardCore.updateScoreBoard();
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "Pre/Suf: " + prefix + suffix);
+        handlePlayerGroup(realName, nickName, prefix, suffix);
 
         event.setJoinMessage(ChatColor.BLUE + nickName + ChatColor.BLUE + " joined the game");
         setPlayerName(player, nickName);
     }
 
-    private void handlePlayerGroup(Player player, String prefix, String suffix) {
-        if(ScoreboardCore.teamExists(player.getName())) {
+    private void handlePlayerGroup(String realName, String nickname, String prefix, String suffix) {
+        if(ScoreboardCore.teamExists(realName)) {
             return;
         } else {
-            ScoreboardCore.createNewPlayerGroup(player.getName(), prefix, suffix);
-            player.setScoreboard(ScoreboardCore.getScoreboard());
+            ScoreboardCore.createNewPlayerGroup(realName, prefix, suffix);
+            ScoreboardCore.addPlayerToGroup(realName, nickname);
         }
     }
 

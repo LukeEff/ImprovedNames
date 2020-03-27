@@ -4,15 +4,15 @@ import io.github.lukeeff.ImprovedNames;
 import io.github.lukeeff.config.Utility;
 import org.bukkit.ChatColor;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-public class Color {
+public class Color implements Listener {
 
     private static ImprovedNames plugin;
 
     public Color(ImprovedNames instance) {
         plugin = instance;
-
     }
 
     @EventHandler

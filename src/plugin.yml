@@ -15,6 +15,31 @@ commands:
     usage: /realname <player>
     permission: improvednames.realname
     permission-message: §e[§bIName§e]§c You don't have permission to unmask a nickname!
+  prefix:
+    description: Set a player's prefix.
+    usage: /prefix <player> <prefix>
+    permission: improvednames.prefix
+    permission-message: §e[§bIName§e]§c You don't have permission to set a prefix!
+  suffix:
+    description: Set a player's suffix.
+    usage: /suffix <player> <suffix>
+    permission: improvednames.suffix
+    permission-message: §e[§bIName§e]§c You don't have permission to set a suffix!
+  clearname:
+    description: Removes a player's nickname
+    usage: /clearname <player>
+    permission: improvednames.clearname
+    permission-message: §e[§bIName§e]§c You don't have permission to remove a nickname!
+  clearprefix:
+    description: Removes a player's prefix
+    usage: /clearprefix <player>
+    permission: improvednames.clearprefix
+    permission-message: §e[§bIName§e]§c You don't have permission to clear a prefix!
+  clearsuffix:
+    description: Removes a player's suffix
+    usage: /clearsuffix <player>
+    permission: improvednames.clearsuffix
+    permission-message: §e[§bIName§e]§c You don't have permission to clear a suffix!
 permissions:
   improvednames.rename.self:
    description: Allows player to rename themself.

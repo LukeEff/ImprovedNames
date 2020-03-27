@@ -22,26 +22,26 @@ abstract class SQLiteSyntax {
     public static final String SUFFIX = "SUFFIX";
 
     //Syntax
-    protected final String VARCHAR = "varChar";
+    protected static final String VARCHAR = "varChar";
     protected final String PRIMARYKEY = "PRIMARY KEY";
     protected final String NOTNULL = "NOT NULL";
     protected final String CREATETABLENEWLINE = " (\n";
 
-    protected final String NEWLINE = "\n";
-    protected final String S = " ";
-    protected final String C = ",";
+    protected static final String NEWLINE = "\n";
+    protected static final String S = " ";
+    protected static final String C = ",";
     protected final String COMMANEWLINE = ",\n";
     protected final String FINISHTABLE = "\n);";
 
     //For inserting new player into table
-    protected final String VALUES = ")\nVALUES ";
-    protected final String WILD = "(?,?,?,?,?,?);";
-    protected final String INSERTPLAYER = "INSERT INTO " + TABLE + " (" +
+    protected static final String VALUES = ")\nVALUES ";
+    protected static final String WILD = "(?,?,?,?,?,?);";
+    protected static final String INSERTPLAYER = "INSERT INTO " + TABLE + " (" +
             UUID + C + REALNAME + C + NICKNAME + C + RAWNICKNAME +
             C + PREFIX + C + SUFFIX + VALUES + WILD;
 
     //For updating
-    protected final String UPDATE = "UPDATE " + TABLE + NEWLINE + "SET ";
+    protected static final String UPDATE = "UPDATE " + TABLE + NEWLINE + "SET ";
 
     //Table creation
     protected final String CREATETABLE = "CREATE TABLE IF NOT EXISTS " + TABLE + CREATETABLENEWLINE;
@@ -58,11 +58,11 @@ abstract class SQLiteSyntax {
          return COMMANEWLINE + name + S + type + S + notNull;
     }
 
-    protected String selectSyntax(String fromColumn, String whereColumn) {
+    protected static String selectSyntax(String fromColumn, String whereColumn) {
         return "SELECT " + fromColumn + " FROM " + TABLE + " WHERE " + whereColumn + " = ?";
     }
 
-    protected String updateSyntax(String column) {
+    protected static String updateSyntax(String column) {
         return UPDATE + column + " = ?\nWHERE " + UUID + " = ?;";
     }
 

@@ -3,6 +3,7 @@ package io.github.lukeeff.scoreboard;
 import io.github.lukeeff.config.Utility;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.ScoreboardManager;
 import org.bukkit.scoreboard.Team;
@@ -97,6 +98,30 @@ public class ScoreboardCore {
         setSuffix(group, groupSuffix);
         group.addEntry(playerName);
     }
+
+    public static void updateScoreBoard() {
+        for (Player online: Bukkit.getOnlinePlayers()) {
+            online.setScoreboard(scoreboard);
+        }
+    }
+
+    public static void addPlayerToGroup(String groupName, String name) {
+        Team group = scoreboard.getTeam(groupName);
+        group.addEntry(name);
+    }
+
+    public static void setNewPlayerPrefix(String playerName, String prefix) {
+        Team group = scoreboard.getTeam(playerName);
+        setPrefix(group, prefix);
+    }
+
+    public static void setNewPlayerSuffix(String playerName, String suffix) {
+        Team group = scoreboard.getTeam(playerName);
+        setSuffix(group, suffix);
+
+    }
+
+
 
     private static void setPrefix(Team group, String prefix) {
         try {

@@ -2,11 +2,15 @@ host: 'localhost'
 wrong-version: '&4Warning: Incompatible server version! Disabling ImprovedNames.'
 database-name: 'improvednames'
 database-folder-name: 'sqlite'
+prefix-in-tab: true
+suffix-in-tab: true
 port: 3306
 username: 'root'
 password: 'password'
 table: 'player_data'
 color-symbol: '&'
+cleared-nickname-success: '&e[&bIName&e] &3Successfully cleared the nickname of player '
+invalid-nickname-message: '&e[&bIName&e] &cIncorrect syntax! Usage: /rename <player> <nickname>'
 offline-message: '&e[&bIName&e] &cThe player you have specified is offline!'
 name-too-long: 'The nickname you specified is too long!'
 rename-usage: '&e[&bIName&e] &cIncorrect syntax! Usage: /rename <player> <nickname>'
